@@ -1,8 +1,10 @@
 from utils.statistics import *
+from utils.reader import *
+from pathlib import Path
 
 
 def main():
-    lst = [1, 2, 4, 5, 88, 43, 2, 457, 77654, -6]
+    lst = read_numbers('data/measurements.txt')
 
     print(calculate_average(lst))
     print(find_max(lst))
