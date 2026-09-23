@@ -2,11 +2,9 @@ from utils.statistics import *
 from utils.reader import *
 from pathlib import Path
 
-file_path = Path("data") / "measurements.txt"
-
-print(Path.cwd())
 
 def main():
+    file_path = Path("data") / "measurements.txt"
     if file_path.exists():
         lst = read_numbers(file_path)
 
@@ -16,7 +14,11 @@ def main():
     else:
         print('Файла не существует')
 
+    print(Path.cwd())
+
+    Path("logs").mkdir(exist_ok=True)
+
 if __name__ == "__main__": 
     main()
 
-Path("logs").mkdir(exist_ok=True)
+
