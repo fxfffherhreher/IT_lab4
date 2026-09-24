@@ -2,24 +2,28 @@ from utils.statistics import *
 from utils.reader import *
 from pathlib import Path
 import logging
+import json
 
+with open("config.json", "r", encoding="utf-8") as file:
+    config = json.load(file)
+    input_file = Path(config["input_file"])
+    log_file = Path(config['log_file'])
 
 def main():
-    Path("logs").mkdir(exist_ok=True)
+    
+    log_file.parent.mkdir(exist_ok=True)
     
     logging.basicConfig(
-        filename="logs/app.log",
+        filename=log_file,
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(message)s",
     )
 
     logging.info('Программа запущена')
 
-    try:
-        file_path = Path("data") / "measurements.txt"
-    except FileNotFoundError:
-        logging.ERROR('Файла не существует')
-        print('Файла не существует')
+    
+    file_path = input_file
+    
 
     if file_path.exists():
         try:
@@ -28,7 +32,7 @@ def main():
             logging.info('Значений прочтено: %s', len(lst))
         except ValueError:
             print('В файле не только числа')
-            logging.ERROR('В файле не только числа')
+            logging.error('В файле не только числа')
         try:
             validate_numbers(lst)
             print(calculate_average(lst))
@@ -41,6 +45,7 @@ def main():
         
     else:
         print('Файла не существует')
+        logging.error('Файла не существует')
 
     print(Path.cwd())
 
