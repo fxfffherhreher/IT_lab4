@@ -12,6 +12,7 @@ with open("config.json", "r", encoding="utf-8") as file:
 def main():
     
     log_file.parent.mkdir(exist_ok=True)
+
     
     logging.basicConfig(
         filename=log_file,
