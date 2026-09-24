@@ -3,3 +3,7 @@ def read_numbers(file_path):
         ans = [float(x) for x in f]
 
     return ans
+
+def validate_numbers(numbers):
+    if len(numbers) == 0:
+        raise ValueError("Список измерений пуст")

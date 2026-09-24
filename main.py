@@ -12,13 +12,17 @@ def main():
     if file_path.exists():
         try:
             lst = read_numbers(file_path)
-
+        except ValueError:
+            print('В файле не только числа')
+        try:
+            validate_numbers(lst)
             print(calculate_average(lst))
             print(find_max(lst))
             print(find_min(lst))
-        except ValueError:
-            print('В файле не только числа')
-    
+        except ValueError as e:
+            print(e)
+
+        
     else:
         print('Файла не существует')
 
